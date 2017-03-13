@@ -5,8 +5,8 @@ import QtQuick.Layouts 1.2
 Item {
     id: page
     width: 700
-    height: 700
-    property alias rect: rect
+    height: 900
+    property alias rect1j1: rect1j1
     property alias mouseAreaBR: mouseAreaBR
     property alias botR: botR
     property alias mouseAreaBM: mouseAreaBM
@@ -26,21 +26,25 @@ Item {
     property alias mouseAreaTL: mouseAreaTL
     property alias topL: topL
     property alias image: image
-
+    
     Image {
         id: image
         x: 0
         y: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         source: "cadrillage.png"
     }
 
     Rectangle {
         id: topL
-        x: 0
-        y: 0
         width: 20
         height: 20
         color: "#00000000"
+        anchors.top: parent.top
+        anchors.topMargin: 130
+        anchors.left: parent.left
+        anchors.leftMargin: 30
         border.color: "#00000000"
 
         MouseArea {
@@ -51,11 +55,13 @@ Item {
 
     Rectangle {
         id: topM
-        x: 310
-        y: 0
+        x: 340
         width: 20
         height: 20
         color: "#00000000"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 130
         border.color: "#00000000"
 
         MouseArea {
@@ -67,12 +73,15 @@ Item {
     Rectangle {
         id: topR
         x: 620
-        y: 0
         width: 20
         height: 20
         color: "#00000000"
+        anchors.top: parent.top
+        anchors.topMargin: 130
+        anchors.right: parent.right
+        anchors.rightMargin: 30
         border.color: "#00000000"
-
+        
         MouseArea {
             id: mouseAreaTR
             anchors.fill: parent
@@ -81,11 +90,13 @@ Item {
 
     Rectangle {
         id: midL
-        x: 0
         y: 310
         width: 20
         height: 20
         color: "#00000000"
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.verticalCenter: parent.verticalCenter
         border.color: "#00000000"
 
         MouseArea {
@@ -101,6 +112,8 @@ Item {
         width: 20
         height: 20
         color: "#00000000"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         border.color: "#00000000"
 
         MouseArea {
@@ -116,8 +129,11 @@ Item {
         width: 20
         height: 20
         color: "#00000000"
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 30
         border.color: "#00000000"
-
+        
         MouseArea {
             id: mouseAreaMR
             anchors.fill: parent
@@ -126,13 +142,16 @@ Item {
 
     Rectangle {
         id: botL
-        x: 0
         y: 620
         width: 20
         height: 20
         color: "#00000000"
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 130
         border.color: "#00000000"
-
+        
         MouseArea {
             id: mouseAreaBL
             anchors.fill: parent
@@ -146,8 +165,11 @@ Item {
         width: 20
         height: 20
         color: "#00000000"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 130
         border.color: "#00000000"
-
+        
         MouseArea {
             id: mouseAreaBM
             anchors.fill: parent
@@ -161,20 +183,42 @@ Item {
         width: 20
         height: 20
         color: "#00000000"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 130
+        anchors.right: parent.right
+        anchors.rightMargin: 30
         border.color: "#00000000"
-
+        
         MouseArea {
             id: mouseAreaBR
             anchors.fill: parent
         }
     }
-
+    
     Rectangle {
-        id: rect
-        x: 138
-        y: 34
-        width: 20
-        height: 20
+        id: rect1j1
+        x: 139
+        y: 60
+        width: 30
+        height: 30
+        color: "#4d0cce"
+    }
+    
+    Rectangle {
+        id: rect2j1
+        x: 340
+        y: 60
+        width: 30
+        height: 30
+        color: "#4d0cce"
+    }
+    
+    Rectangle {
+        id: rect2j2
+        x: 562
+        y: 60
+        width: 30
+        height: 30
         color: "#4d0cce"
     }
 

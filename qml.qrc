@@ -2,6 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
-        <file>qtlogo.png</file>
+        <file>cadrillage.png</file>
     </qresource>
 </RCC>

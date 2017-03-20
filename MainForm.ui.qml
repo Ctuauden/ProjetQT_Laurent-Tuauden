@@ -1,182 +1,208 @@
 import QtQuick 2.5
-import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.2
 
-Item {
-    id: page
-    width: 700
-    height: 700
-    property alias rect: rect
-    property alias mouseAreaBR: mouseAreaBR
-    property alias botR: botR
-    property alias mouseAreaBM: mouseAreaBM
-    property alias botM: botM
-    property alias mouseAreaBL: mouseAreaBL
-    property alias botL: botL
-    property alias mouseAreaMR: mouseAreaMR
-    property alias midR: midR
-    property alias mouseAreaMM: mouseAreaMM
-    property alias midM: midM
-    property alias mouseAreaML: mouseAreaML
-    property alias mouseAreaTR: mouseAreaTR
-    property alias midL: midL
-    property alias topR: topR
-    property alias mouseAreaTM: mouseAreaTM
-    property alias topM: topM
-    property alias mouseAreaTL: mouseAreaTL
-    property alias topL: topL
-    property alias image: image
+Rectangle {
+    id: rectangle  // rectangle de fond
 
-    Image {
-        id: image
+    width: 320
+    height: 240
+    color: "#ffffff"   // couleur de fond
+    radius: 16
+    property alias rectangle00: rectangle00
+    property alias mouseArea00: mouseArea00
+    property alias rectangle01: rectangle01
+    property alias mouseArea01: mouseArea01
+    property alias rectangle02: rectangle02
+    property alias mouseArea02: mouseArea02
+    property alias rectangle20: rectangle20
+    property alias mouseArea20: mouseArea20
+    property alias rectangle21: rectangle21
+    property alias mouseArea21: mouseArea21
+    property alias rectangle22: rectangle22
+    property alias mouseArea22: mouseArea22
+    property alias mouseArea11: mouseArea11
+    property alias rectangle11: rectangle11
+    property alias mouseArea10: mouseArea10
+    property alias rectangle10: rectangle10
+    property alias mouseArea12: mouseArea12
+    property alias rectangle12: rectangle12
+    property alias text1: text1
+
+    border.width: 7    // taille bordure
+    border.color: "#000000"   // couleur bordure
+
+    Rectangle {
+        id: rectangle11
+        x: 99  // position
+        y: 64
+        width: 40 // taille
+        height: 40
+        color: Jeu.states[4]
+        anchors.horizontalCenter: parent.horizontalCenter  // centrer sur le cadre rectangle d'avant
+        anchors.verticalCenter: parent.verticalCenter
+        border.color: "#000000"
+
+        MouseArea {
+            id: mouseArea11
+            x: -30
+            y: 75
+            anchors.fill: parent
+        }
+    }
+
+    Rectangle {
+        id: rectangle12
+        x: 235
+        y: 100
+        width: 40
+        height: 40
+        color: Jeu.states[5]
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 45
+        border.color: "#000000"
+
+        MouseArea {
+            id: mouseArea12
+            anchors.fill: parent
+        }
+    }
+
+    Text {   // texte dedans
+        id: text1
+        x: 110
+        y: 95
+        width: 100
+        height: 50
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        font.family: "Tahoma"
+        font.pixelSize: 24
+        focus: true     // important !!!!!
+        text: vueObjetCpt.cptQML
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    Rectangle {
+        id: rectangle10
+        y: 100
+        width: 40
+        height: 40
+        color: Jeu.states[3]
+        anchors.left: parent.left
+        anchors.leftMargin: 45
+        anchors.verticalCenterOffset: 0
+        anchors.verticalCenter: parent.verticalCenter
+        border.color: "#000000"
+
+        MouseArea {
+            id: mouseArea10
+            anchors.fill: parent
+        }
+    }
+
+    Rectangle {
+        id: rectangle00
+        width: 40
+        height: 40
+        color: Jeu.states[0]
+        anchors.left: parent.left
+        anchors.leftMargin: 45
+        anchors.top: parent.top
+        anchors.topMargin: 20
+        border.color: "#000000"
+
+        MouseArea {
+            id: mouseArea00
+            anchors.fill: parent
+        }
+    }
+
+    Rectangle {
+        id: rectangle01
+        x: 7
+        y: 4
+        width: 40
+        height: 40
+        color: Jeu.states[1]
+        anchors.horizontalCenter: parent.horizontalCenter
+        MouseArea {
+            id: mouseArea01
+            anchors.fill: parent
+        }
+        anchors.topMargin: 20
+        anchors.top: parent.top
+        border.color: "#000000"
+    }
+
+    Rectangle {
+        id: rectangle02
+        x: 2
+        y: 10
+        width: 40
+        height: 40
+        color: Jeu.states[2]
+        anchors.right: parent.right
+        anchors.rightMargin: 45
+        MouseArea {
+            id: mouseArea02
+            anchors.fill: parent
+        }
+        anchors.topMargin: 20
+        anchors.top: parent.top
+        border.color: "#000000"
+    }
+
+    Rectangle {
+        id: rectangle20
+        y: 10
+        width: 40
+        height: 40
+        color: Jeu.states[6]
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        anchors.left: parent.left
+        anchors.leftMargin: 45
+        border.color: "#000000"
+        MouseArea {
+            id: mouseArea20
+            anchors.fill: parent
+        }
+    }
+
+    Rectangle {
+        id: rectangle21
         x: 0
-        y: 0
-        source: "cadrillage.png"
-    }
-
-    Rectangle {
-        id: topL
-        x: 0
-        y: 0
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
+        y: 9
+        width: 40
+        height: 40
+        color: Jeu.states[7]
+        anchors.horizontalCenter: parent.horizontalCenter
         MouseArea {
-            id: mouseAreaTL
+            id: mouseArea21
             anchors.fill: parent
         }
+        anchors.bottomMargin: 20
+        anchors.bottom: parent.bottom
+        border.color: "#000000"
     }
 
     Rectangle {
-        id: topM
-        x: 310
-        y: 0
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
+        id: rectangle22
+        x: -1
+        y: 3
+        width: 40
+        height: 40
+        color: Jeu.states[8]
+        anchors.right: parent.right
+        anchors.rightMargin: 45
         MouseArea {
-            id: mouseAreaTM
+            id: mouseArea22
             anchors.fill: parent
         }
+        anchors.bottomMargin: 20
+        anchors.bottom: parent.bottom
+        border.color: "#000000"
     }
-
-    Rectangle {
-        id: topR
-        x: 620
-        y: 0
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaTR
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: midL
-        x: 0
-        y: 310
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaML
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: midM
-        x: 310
-        y: 310
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaMM
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: midR
-        x: 620
-        y: 310
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaMR
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: botL
-        x: 0
-        y: 620
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaBL
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: botM
-        x: 310
-        y: 620
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaBM
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: botR
-        x: 620
-        y: 620
-        width: 20
-        height: 20
-        color: "#00000000"
-        border.color: "#00000000"
-
-        MouseArea {
-            id: mouseAreaBR
-            anchors.fill: parent
-        }
-    }
-
-    Rectangle {
-        id: rect
-        x: 138
-        y: 34
-        width: 20
-        height: 20
-        color: "#4d0cce"
-    }
-
-
 }

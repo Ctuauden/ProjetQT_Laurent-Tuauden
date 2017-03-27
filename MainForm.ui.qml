@@ -1,4 +1,6 @@
 import QtQuick 2.5
+import QtQuick.Layouts 1.2
+import QtQuick.Controls 1.4
 
 Rectangle {
     id: rectangle  // rectangle de fond
@@ -26,9 +28,14 @@ Rectangle {
     property alias mouseArea12: mouseArea12
     property alias rectangle12: rectangle12
     property alias text1: text1
+    property alias item1: item1
+    property alias button1: button1
 
     border.width: 7    // taille bordure
     border.color: "#000000"   // couleur bordure
+
+
+
 
     Rectangle {
         id: rectangle11
@@ -70,7 +77,7 @@ Rectangle {
     Text {   // texte dedans
         id: text1
         x: 110
-        y: 95
+        y: 137
         width: 100
         height: 50
         verticalAlignment: Text.AlignVCenter
@@ -78,9 +85,10 @@ Rectangle {
         font.family: "Tahoma"
         font.pixelSize: 24
         focus: true     // important !!!!!
-        text: vueObjetCpt.cptQML
+        text: "C'est au joueur "+vueObjetCpt.cptQML+" de jouer"
+        anchors.horizontalCenterOffset: 0
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
+        anchors.bottomMargin: 53
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -204,5 +212,22 @@ Rectangle {
         anchors.bottomMargin: 20
         anchors.bottom: parent.bottom
         border.color: "#000000"
+    }
+
+    Item {
+        id: item1
+        x: 21
+        y: 66
+        width: 128
+        height: 28
+
+        RowLayout {
+            anchors.centerIn: parent
+
+            Button {
+                id: button1
+                text: qsTr("Nouvelle partie")
+            }
+        }
     }
 }

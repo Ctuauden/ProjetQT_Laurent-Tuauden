@@ -8,7 +8,7 @@ Compteur::Compteur(QObject *parent) : QObject(parent)
 
 QString Compteur::readCompteur()
 {
-    return QString::number(fCompteur);
+    return QString::number(fCompteur%2+1);
 }
 
 void Compteur::increment() {

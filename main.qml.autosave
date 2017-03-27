@@ -30,10 +30,10 @@ ApplicationWindow {
             onClicked:
                 {vueObjetCpt.increment();
                 Jeu.changement(0);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}}
+                if(Jeu.get_victoire()==1)  // si victoire du joueur 1
+                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}  // afficher un message dans un nouvelle fenetre
+                if(Jeu.get_victoire()==2)  // si victoire du joueur 2
+                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}} // afficher un message dans un nouvelle fenetre
         }
         mouseArea01{
             onClicked:
@@ -106,15 +106,16 @@ ApplicationWindow {
             onClicked:
                 {vueObjetCpt.increment();
                 Jeu.changement(8);
-                if(Jeu.get_victoire()==1)
+                if(Jeu.get_victoire()==1) 
                     {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
                 if(Jeu.get_victoire()==2)
                     {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
                 }
         }
-        button1.onClicked: Jeu.nouvelle_partie()
+        button1.onClicked: Jeu.nouvelle_partie()  // pour lançer une nouvelle partie
     }
 
+    // message à afficher quand victoire
     MessageDialog {
         id: messageDialog
         title: qsTr("Fin de la partie !")

@@ -14,12 +14,12 @@ void jeu::Init(QString value){
     C=0;
 }
 
-void jeu::nouvelle_partie(){
+void jeu::nouvelle_partie(){   // méthode appelée quand on clique sur le bouton "Nouvelle Partie"
     for(int i=0;i<9;i++)
-        {D[i]="#000000";}
-    C=0;
-    victoire=0;
-    statesChanged();
+        {D[i]="#000000";}   // remet toutes les cases en noires
+    C=0;                    // remet le compteur de tour à 0
+    victoire=0;             // remet la victoire à 0
+    statesChanged();        // actualise les chgmts dans mainform
 }
 
 QList<QString> jeu::readStates()
@@ -27,8 +27,10 @@ QList<QString> jeu::readStates()
     return D;
 }
 
-//c :
-void jeu::test_victoire(){
+
+void jeu::test_victoire(){              // methode appelée à chaque fois que l'on change une case de couleur : 
+    // met l'attribu victoire à 1 si le joueur 1 a gagné, et à 2 si le joueur 2 a gagné
+    // change la couleur sur la ligne gagner : en rouge
 
     // joueur 1 gagne
     if(D[0]=="#00ff00" && D[1]=="#00ff00" && D[2]=="#00ff00"){
@@ -83,7 +85,7 @@ void jeu::test_victoire(){
         D[2]="#ff0000";D[4]="#ff0000";D[6]="#ff0000";}
 }
 
-int jeu::get_victoire(){
+int jeu::get_victoire(){  // retourne l'attribu victoire
     return victoire;
 }
 

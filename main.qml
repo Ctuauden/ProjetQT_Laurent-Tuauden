@@ -29,99 +29,66 @@ ApplicationWindow {
         mouseArea00{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(0,0);
                 Jeu.changement(0);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}}
+                }
         }
         mouseArea01{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(0,1);
                 Jeu.changement(1);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
+
                 }
         }
         mouseArea02{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(0,2);
                 Jeu.changement(2);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}}
+}
         }
         mouseArea10{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(1,0);
                 Jeu.changement(3);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
                 }
         }
         mouseArea11{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(1,1);
                 Jeu.changement(4);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}}
+                }
         }
         mouseArea12{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(1,2);
                 Jeu.changement(5);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
                 }
         }
         mouseArea20{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(2,0);
                 Jeu.changement(6);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}}
+                }
         }
         mouseArea21{
             onClicked:
                 {vueObjetCpt.increment();
+                Jeu.deplacement(2,1);
                 Jeu.changement(7);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
+
                 }
         }
         mouseArea22{
             onClicked:
                 {vueObjetCpt.increment();
-                Jeu.changement(8);
-                if(Jeu.get_victoire()==1)
-                    {messageDialog.show(qsTr("Joueur 1, vous avez gagné"));}
-                if(Jeu.get_victoire()==2)
-                    {messageDialog.show(qsTr("Joueur 2, vous avez gagné"));}
-                }
-        }
-        button1.onClicked: Jeu.nouvelle_partie()
-    }
-
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("Fin de la partie !")
-
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
+                Jeu.deplacement(2,2);
+                Jeu.changement(8);}
         }
     }
 }

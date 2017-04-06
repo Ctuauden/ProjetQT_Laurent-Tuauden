@@ -1,5 +1,9 @@
 #include "jeu.h"
 #include "compteur.h"
+#include "windows.h"
+#include <iostream>
+
+using namespace std;
 
 jeu::jeu(QObject *parent) : QObject(parent)
 {
@@ -7,13 +11,14 @@ jeu::jeu(QObject *parent) : QObject(parent)
     statesChanged();
 }
 
-
 void jeu::Init(QString value){
     for(int i=0;i<9;i++)
         {D.append(value);}
     C=0;
     CasePrecedente.push_back(-1);
     CasePrecedente.push_back(-1);
+    couleurj1="#00ff00";
+    couleurj2="#0000ff";
 }
 
 
@@ -47,12 +52,17 @@ void jeu::changement(int j) {
     if(D[j]=="#000000"){         // si la case est noire (pas déjà occupée)
         // On colorie la case en vert si la main est au joueur 1 ou en blue si la main est au joueur 2
         if(C%2==0)
-            {D[j]="#00ff00";}
+            {D[j]=couleurj1;
+            test_victoire();
+        }
         if(C%2==1)
-            {D[j]="#0000ff";}
+            {D[j]=couleurj2;
+            test_victoire();
+        }
         C++;}
        }
     statesChanged();
+    cptChanged();
 }
 
 void jeu::deplacement(int x, int y) {
@@ -75,14 +85,15 @@ void jeu::deplacement(int x, int y) {
 
        // Si c'est au tour du joueur 1
        // Il faut qu'il ait sélectionné auparavant une case lui appartenant
-       if (C%2==0 && D[3*xprecedent+yprecedent]=="#00ff00"){
+       if (C%2==0 && D[3*xprecedent+yprecedent]==couleurj1){
 
               // S'il clique sur une case libre qui est voisine de la sienne
               if (D[3*x+y]=="#000000" && std::abs(x-xprecedent)<=1 && std::abs(y-yprecedent)<=1){
 
                   // On colorie la nouvelle case avec la couleur du joueur 1 et l'ancienne devient libre (noire)
-                  D[3*x+y]="#00ff00";
+                  D[3*x+y]=couleurj1;
                   D[3*xprecedent+yprecedent]="#000000";
+                  test_victoire();
 
                   // On remet le vecteur CasePrecedente "à 0" pour demander une nouvelle séleciton de case
                   CasePrecedente[0]=-1;
@@ -95,14 +106,15 @@ void jeu::deplacement(int x, int y) {
 
        // Si c'est au tour du joueur 2
        // Il faut qu'il ait sélectionné aupravant une case lui appartenant
-       if (C%2==1 && D[3*xprecedent+yprecedent]=="#0000ff"){
+       if (C%2==1 && D[3*xprecedent+yprecedent]==couleurj2){
 
               // S'il clique sur une case livre et voisine de la sienne
               if (D[3*x+y]=="#000000" && std::abs(x-xprecedent)<=1 && std::abs(y-yprecedent)<=1){
 
                   // On colorie la nouvelle case avec la couleur du joueur 2 et l'ancienne devient libre (noire)
-                  D[3*x+y]="#0000ff";
+                  D[3*x+y]=couleurj2;
                   D[3*xprecedent+yprecedent]="#000000";
+                  test_victoire();
 
                   // On remet le vecteur CasePrecedente "à 0" pour demander une nouvelle sélection de case
                   CasePrecedente[0]=-1;
@@ -116,10 +128,117 @@ void jeu::deplacement(int x, int y) {
     }
 
     /*Si on vient de faire un déplacement ou que l'on commence le tour 7, alors on stock les valeurs x et y dans
-      la variable CasePrecedente.*/
+      la variable CasePrecedente. */
 
-    else {CasePrecedente[0]=x;
-        CasePrecedente[1]=y;}
+    else {
+        if(D[3*x+y]!="#000000")
+            {CasePrecedente[0]=x;
+            CasePrecedente[1]=y;}}
 }
+    statesChanged();
+    cptChanged();
+}
+
+void jeu::nouvelle_partie(){   // méthode appelée quand on clique sur le bouton "Nouvelle Partie"
+    for(int i=0;i<9;i++)
+        {D[i]="#000000";}   // remet toutes les cases en noires
+    C=0;                    // remet le compteur de tour à 0
+    victoire=0;             // remet la victoire à 0
+    CasePrecedente[0]=-1;
+    CasePrecedente[1]=-1;
+    statesChanged();        // actualise les chgmts dans mainform
+    cptChanged();
+}
+
+void jeu::test_victoire(){              // methode appelée à chaque fois que l'on change une case de couleur :
+    // met l'attribu victoire à 1 si le joueur 1 a gagné, et à 2 si le joueur 2 a gagné
+    // change la couleur sur la ligne gagner : en rouge
+
+    // joueur 1 gagne
+    if(D[0]==couleurj1 && D[1]==couleurj1 && D[2]==couleurj1){
+        victoire=1;
+        D[0]="#ff0000";D[1]="#ff0000";D[2]="#ff0000";}
+    if(D[3]==couleurj1 && D[4]==couleurj1 && D[5]==couleurj1){
+        victoire=1;
+        D[3]="#ff0000";D[4]="#ff0000";D[5]="#ff0000";}
+    if(D[6]==couleurj1 && D[7]==couleurj1 && D[8]==couleurj1){
+        victoire=1;
+        D[6]="#ff0000";D[7]="#ff0000";D[8]="#ff0000";}
+    if(D[0]==couleurj1 && D[3]==couleurj1 && D[6]==couleurj1){
+        victoire=1;
+        D[0]="#ff0000";D[3]="#ff0000";D[6]="#ff0000";}
+    if(D[1]==couleurj1 && D[4]==couleurj1 && D[7]==couleurj1){
+        victoire=1;
+        D[1]="#ff0000";D[4]="#ff0000";D[7]="#ff0000";}
+    if(D[2]==couleurj1 && D[5]==couleurj1 && D[8]==couleurj1){
+        victoire=1;
+        D[2]="#ff0000";D[5]="#ff0000";D[8]="#ff0000";}
+    if(D[0]==couleurj1 && D[4]==couleurj1 && D[8]==couleurj1){
+        victoire=1;
+        D[0]="#ff0000";D[4]="#ff0000";D[8]="#ff0000";}
+    if(D[2]==couleurj1 && D[4]==couleurj1 && D[6]==couleurj1){
+        victoire=1;
+        D[2]="#ff0000";D[4]="#ff0000";D[6]="#ff0000";}
+
+    // joueur 2 gagne
+    if(D[0]==couleurj2 && D[1]==couleurj2 && D[2]==couleurj2){
+        victoire=2;
+        D[0]="#ff0000";D[1]="#ff0000";D[2]="#ff0000";}
+    if(D[3]==couleurj2 && D[4]==couleurj2 && D[5]==couleurj2){
+        victoire=2;
+        D[3]="#ff0000";D[4]="#ff0000";D[5]="#ff0000";}
+    if(D[6]==couleurj2 && D[7]==couleurj2 && D[8]==couleurj2){
+        victoire=2;
+        D[6]="#ff0000";D[7]="#ff0000";D[8]="#ff0000";}
+    if(D[0]==couleurj2 && D[3]==couleurj2 && D[6]==couleurj2){
+        victoire=2;
+        D[0]="#ff0000";D[3]="#ff0000";D[6]="#ff0000";}
+    if(D[1]==couleurj2 && D[4]==couleurj2 && D[7]==couleurj2){
+        victoire=2;
+        D[1]="#ff0000";D[4]="#ff0000";D[7]="#ff0000";}
+    if(D[2]==couleurj2 && D[5]==couleurj2 && D[8]==couleurj2){
+        victoire=2;
+        D[2]="#ff0000";D[5]="#ff0000";D[8]="#ff0000";}
+    if(D[0]==couleurj2 && D[4]==couleurj2 && D[8]==couleurj2){
+        victoire=2;
+        D[0]="#ff0000";D[4]="#ff0000";D[8]="#ff0000";}
+    if(D[2]==couleurj2 && D[4]==couleurj2 && D[6]==couleurj2){
+        victoire=2;
+        D[2]="#ff0000";D[4]="#ff0000";D[6]="#ff0000";}
+}
+
+int jeu::get_victoire(){  // retourne l'attribu victoire
+    return victoire;
+}
+
+
+QString jeu::readCompteur()
+{
+    return QString::number(C%2+1);
+}
+
+/*
+void jeu::increment() {
+    C++;
+    cptChanged();
+}*/
+
+void jeu::changement_couleur(int j, QString couleur){
+    if (j==1 && couleur!=couleurj2){
+        for (int i=0;i<9;i++){
+            if (D[i]==couleurj1){
+                D[i]=couleur;
+            }
+        }
+        couleurj1=couleur;
+    }
+    if (j==2 && couleur!=couleurj1){
+        for (int i=0;i<9;i++){
+            if (D[i]==couleurj2){
+                D[i]=couleur;
+            }
+        }
+        couleurj2=couleur;
+    }
     statesChanged();
 }

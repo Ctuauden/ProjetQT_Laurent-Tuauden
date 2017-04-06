@@ -5,13 +5,21 @@ La dernière version de ce projet a été uploadée le 06/04/2017.
 Les fichiers à utiliser sont les suivants : 
 
 JeuAraignee.pro 	
+
 JeuAraignee.pro.user 	
+
 MainForm.ui.qml
+
 cadrillage.png
+
 jeu.cpp
+
 jeu.h
+
 main.cpp
+
 main.qml
+
 qml.qrc
 
 La procédure du jeu est la suivante : 

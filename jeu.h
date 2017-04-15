@@ -15,7 +15,6 @@ public:
     /*Q_INVOKABLE void increment();*/
 
     Q_PROPERTY(QString cptQML READ readCompteur NOTIFY cptChanged);
-
     QString readCompteur();
 
     // jeu
@@ -23,7 +22,6 @@ public:
     Q_INVOKABLE void Init(QString value="#000000");
 
     Q_PROPERTY(QList<QString> states READ readStates NOTIFY statesChanged);
-
     QList<QString> readStates();
 
     Q_INVOKABLE void changement(int j);
@@ -33,11 +31,15 @@ public:
     Q_INVOKABLE int get_victoire();  //c
     Q_INVOKABLE void nouvelle_partie();  //c
     Q_INVOKABLE void changement_couleur(int j, QString couleur);
+    //Q_INVOKABLE void attente();
 
+    Q_PROPERTY(QString mesQML READ readmessage NOTIFY mesChanged);
+    QString readmessage();
 
 signals:
     void statesChanged();
     void cptChanged();
+    void mesChanged();
 
 public slots:
 
@@ -47,9 +49,11 @@ private:
     QList<QString> D;
     int C;
     int victoire=0; //c
+    QString message;
 
     QString couleurj1;
     QString couleurj2;
+    int phase;
 };
 
 #endif // JEU_H

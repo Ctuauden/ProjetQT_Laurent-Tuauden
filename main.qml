@@ -153,6 +153,7 @@ MessageDialog {
         onNo: Qt.quit()
 
     function show(caption) {
+        //Jeu.attente();
         messageDialog.text = caption+" ! Voulez-vous rejouez ?";
         messageDialog.open();
     }

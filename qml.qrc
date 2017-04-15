@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>cadrillage.png</file>
+        <file>cadrillage1.png</file>
     </qresource>
 </RCC>

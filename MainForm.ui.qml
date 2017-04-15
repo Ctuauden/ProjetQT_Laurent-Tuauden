@@ -9,6 +9,7 @@ Rectangle {
     height: 700
     color: "#00000000"   // couleur de fond
     radius: 3
+    property alias text2: text2
     border.color: "#ffffff"
     property alias image: image
     property alias rectangle00: rectangle00
@@ -222,7 +223,7 @@ Rectangle {
         anchors.leftMargin: 30
         anchors.top: parent.top
         anchors.topMargin: 30
-        source: "cadrillage.png"
+        source: "cadrillage1.png"
     }
     Item {
         id: item1
@@ -239,5 +240,20 @@ Rectangle {
                 text: qsTr("Nouvelle partie")
             }
         }
+    }
+
+    Text {
+        id: text2
+        x: 30
+        y: 3
+        width: 506
+        height: 38
+        text: qsTr(Jeu.mesQML)
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        horizontalAlignment: Text.AlignHCenter
+        font.family: "Tahoma"
+        font.pixelSize: 18
+        focus: true
     }
 }

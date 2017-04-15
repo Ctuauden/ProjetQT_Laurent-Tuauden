@@ -17,8 +17,10 @@ void jeu::Init(QString value){
     C=0;
     CasePrecedente.push_back(-1);
     CasePrecedente.push_back(-1);
+    message="";
     couleurj1="#00ff00";
     couleurj2="#0000ff";
+    phase=1;
 }
 
 
@@ -59,10 +61,17 @@ void jeu::changement(int j) {
             {D[j]=couleurj2;
             test_victoire();
         }
-        C++;}
-       }
+        C++;
+        message="";
+        }
+    else
+        message="Case déjà occupée, cliquez sur une autre";
+    }
+    if(C==6)
+        message="Joueur 1, sélectionnez le pion à déplacer";
     statesChanged();
     cptChanged();
+    mesChanged();
 }
 
 void jeu::deplacement(int x, int y) {
@@ -70,9 +79,32 @@ void jeu::deplacement(int x, int y) {
 
     // Cette fonction n'intervient qu'après le tour 6.
     if (C>=6){
+    if(phase==1){
+        if (D[3*x+y]!="#000000"){
+            if (C%2==0 && D[3*x+y]==couleurj1){
+                CasePrecedente[0]=x;
+                CasePrecedente[1]=y;
+                phase=2;
+                message="Selectionner le nouvel emplacement de ce pion";}
+            if (C%2==1 && D[3*x+y]==couleurj2){
+                CasePrecedente[0]=x;
+                CasePrecedente[1]=y;
+                phase=2;
+                message="Selectionner le nouvel emplacement de ce pion";}
+            if (C%2==0 && D[3*x+y]==couleurj2){
+                message="Joueur 1, selectionner un pion de votre couleur";}
+            if (C%2==1 && D[3*x+y]==couleurj1){
+                message="Joueur 2, selectionner un pion de votre couleur";}
+        }
+        else{
+            message="Erreur : sélectionner un pion de votre couleur pour le déplaçer";
+        }
+    }
 
-    // Si on a déjà sélectionné la case à bouger
-    if(CasePrecedente[1]!=-1){
+    else
+        {if(phase==2){
+        if (CasePrecedente[0]==x && CasePrecedente[1]==y)
+            message="Sélectionner la case d'arrivée de ce pion";
 
         // Si la case à bouger n'est pas celle que l'on a sélectionnée auparavant
         if (CasePrecedente[0]!=x || CasePrecedente[1]!=y){
@@ -84,9 +116,7 @@ void jeu::deplacement(int x, int y) {
            yprecedent=CasePrecedente[1];
 
        // Si c'est au tour du joueur 1
-       // Il faut qu'il ait sélectionné auparavant une case lui appartenant
-       if (C%2==0 && D[3*xprecedent+yprecedent]==couleurj1){
-
+        if (C%2==0){
               // S'il clique sur une case libre qui est voisine de la sienne
               if (D[3*x+y]=="#000000" && std::abs(x-xprecedent)<=1 && std::abs(y-yprecedent)<=1){
 
@@ -95,19 +125,25 @@ void jeu::deplacement(int x, int y) {
                   D[3*xprecedent+yprecedent]="#000000";
                   test_victoire();
 
-                  // On remet le vecteur CasePrecedente "à 0" pour demander une nouvelle séleciton de case
+                  // On remet le vecteur CasePrecedente "à 0" pour demander une nouvelle sélection de case
                   CasePrecedente[0]=-1;
                   CasePrecedente[1]=-1;
+                  phase=1;
 
                   // Le déplacement ayant fonctionné, on peut passer au joueur suivant
                   C++;
+                  message="Joueur 2, sélectionner le pion à déplacer";
               }
+              else
+              {if (D[3*x+y]!="#000000")
+                  message="Selectionnez une case vide";}
+              if (std::abs(x-xprecedent)>1 || std::abs(y-yprecedent)>1)
+                  message="Ce déplacement n'est pas possible, selectionner une case accessible";
         }
-
        // Si c'est au tour du joueur 2
        // Il faut qu'il ait sélectionné aupravant une case lui appartenant
-       if (C%2==1 && D[3*xprecedent+yprecedent]==couleurj2){
-
+        else{
+        if (C%2==1){
               // S'il clique sur une case livre et voisine de la sienne
               if (D[3*x+y]=="#000000" && std::abs(x-xprecedent)<=1 && std::abs(y-yprecedent)<=1){
 
@@ -119,24 +155,26 @@ void jeu::deplacement(int x, int y) {
                   // On remet le vecteur CasePrecedente "à 0" pour demander une nouvelle sélection de case
                   CasePrecedente[0]=-1;
                   CasePrecedente[1]=-1;
+                  phase=1;
 
                   // Le déplacement ayant fonctionné, on peut passer au joueur suivant
                   C++;
+                  message="Joueur 1, sélectionnez le pion à déplacer";
               }
-        }
+              else
+              {if (D[3*x+y]!="#000000")
+                  message="Selectionnez une case vide";}
+              if (std::abs(x-xprecedent)>1 || std::abs(y-yprecedent)>1)
+                  message="Ce déplacement n'est pas possible, selectionner une case accessible";
+
+        }}
         }
     }
-
-    /*Si on vient de faire un déplacement ou que l'on commence le tour 7, alors on stock les valeurs x et y dans
-      la variable CasePrecedente. */
-
-    else {
-        if(D[3*x+y]!="#000000")
-            {CasePrecedente[0]=x;
-            CasePrecedente[1]=y;}}
-}
+    }
+    }
     statesChanged();
     cptChanged();
+    mesChanged();
 }
 
 void jeu::nouvelle_partie(){   // méthode appelée quand on clique sur le bouton "Nouvelle Partie"
@@ -144,10 +182,13 @@ void jeu::nouvelle_partie(){   // méthode appelée quand on clique sur le bouto
         {D[i]="#000000";}   // remet toutes les cases en noires
     C=0;                    // remet le compteur de tour à 0
     victoire=0;             // remet la victoire à 0
+    message="";
     CasePrecedente[0]=-1;
     CasePrecedente[1]=-1;
+    phase=1;
     statesChanged();        // actualise les chgmts dans mainform
     cptChanged();
+    mesChanged();
 }
 
 void jeu::test_victoire(){              // methode appelée à chaque fois que l'on change une case de couleur :
@@ -212,6 +253,12 @@ int jeu::get_victoire(){  // retourne l'attribu victoire
 }
 
 
+QString jeu::readmessage()
+{
+    return message;
+}
+
+
 QString jeu::readCompteur()
 {
     return QString::number(C%2+1);
@@ -242,3 +289,8 @@ void jeu::changement_couleur(int j, QString couleur){
     }
     statesChanged();
 }
+
+/*
+void jeu::attente(){
+    Sleep(1000);
+}*/

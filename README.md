@@ -1,16 +1,16 @@
 # ProjetQT_Laurent-Tuauden
 Projet GUI S8 2017 LAURENT Marie &amp; TUAUDEN Corentin : Jeu de l'Araignée
 
-La dernière version de ce projet a été uploadée le 06/04/2017.
+La dernière version de ce projet a été uploadée le 15/04/2017.
 Les fichiers à utiliser sont les suivants : 
 
-JeuAraignee.pro 	
+JeuAraignee_11_04_2017.pro 	
 
-JeuAraignee.pro.user 	
+JeuAraignee_11_04_2017.pro.user 	
 
 MainForm.ui.qml
 
-cadrillage.png
+cadrillage1.png
 
 jeu.cpp
 
